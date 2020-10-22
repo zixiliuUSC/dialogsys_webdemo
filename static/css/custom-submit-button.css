@@ -1,0 +1,75 @@
+/* switch */
+
+/* The switch - the box around the slider */
+
+#submission-div {
+  position: relative; 
+}
+
+
+#submit-notify {
+  position: absolute; 
+  box-shadow: 0 8px 6px -6px black, 0px 0px 6px -3px black;
+  top: 0px; 
+  right: 100px; 
+  z-index: 20; 
+  padding: 10px; 
+  width: 400px; 
+  font-weight: 300; 
+  background-color: white;
+  display: none; 
+}
+
+@media (max-width: 1200px){
+  #submit-notify{
+    width: 300px; 
+  }
+}
+
+
+#red-arrow{
+  position: absolute;
+  width: 50px; 
+  top: -55px;
+  right: -10px;
+  display: none; 
+  /* transform: rotate(20deg); */
+}
+
+#submission-info {
+    position: absolute;
+    background: white; 
+    /* border: gray 1px solid; */
+    top: 34px; 
+    right: 0px;
+    width: 30vh;  
+    z-index: 100; 
+    padding: 10px; 
+    font-weight: 300; 
+    display: none; 
+    box-shadow: 0 8px 6px -6px black, 
+                0px 0px 6px -3px black;
+
+}
+
+.header{
+  position: relative
+}
+
+#submit-message{
+  display: none; 
+  position: absolute; 
+  bottom: 0; 
+  box-shadow: 0 8px 6px -10px black, 0px 0px 6px -3px black, 0px -20px 10px -3px white;
+}
+
+#submit-button{
+  padding: 4px 10px; 
+  margin: 2px; 
+  z-index: 300; 
+  background-color: #69ABFF;
+  border: lightgrey 1px solid; 
+  color: white; 
+}
+
+

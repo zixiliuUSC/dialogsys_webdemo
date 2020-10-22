@@ -1,0 +1,9 @@
+__pycache__/*
+.ipynb_checkpoints/*
+.dockerignore
+Dockerfile
+py36.yaml
+README.md
+requirements.txt
+wsgi.py
+.vscode

@@ -1,0 +1,305 @@
+body{
+    font-family: "Roboto", Helvetica, sans-serif;
+    padding-top: 20px;
+}
+
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+
+strong{
+    font-weight: 700;
+}
+
+label{
+    font-weight: 300; 
+}
+
+
+#title{
+    margin-top: 20px;
+    text-align: center;
+    font-family: "Abril Fatface", Helvetica, sans-serif;
+    font-weight: bolder;
+}
+
+#dataset{
+    font-family: "Abril Fatface", Helvetica, sans-serif;
+    font-weight: bolder;
+}
+
+.chat-container{
+    position: relative; 
+}
+
+#instructions{
+    border: black solid 2px; 
+    position: absolute; 
+    top: -35px; 
+    /* margin-right: auto; 
+    margin-left: auto;   */
+    height: 70vh; 
+    z-index: 100; 
+    background-color: white;
+    padding-top: 20px; 
+    padding-bottom: 20px;
+    border-radius: 5px;
+    display: none;  
+    box-shadow: 0px 0px 300px 200px white; 
+    border: 1px solid rgb(119, 119, 119);
+}
+
+#instruction-list{
+    overflow-y: auto;
+    height: 55vh; 
+}
+
+#instructions h3 {
+    margin-top: 30px; 
+    margin-bottom: 30px; 
+    font-family: 'Abril Fatface', cursive;
+}
+
+#instructions p {
+    text-align: justify; 
+    padding: 10px 30px; 
+}
+
+
+#short-description{
+    margin: 20px;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+
+.chat-name, .glyphicon-comment, #sendbutton{
+    white-space: pre;
+}
+
+.chat-name{
+    font-weight: 700; 
+    font-family: 'Abril Fatface', 'Helvetica', 'sans-serif'; 
+}
+
+
+a:hover{
+    text-decoration:none;
+}
+
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    margin-bottom: 5px;
+}
+
+.chat-body{
+    padding: 5px;
+    max-width: 80%; 
+    display: flex;
+    flex-direction: column;
+}
+
+li.right .chat-body .message{
+    background-color:  #0084FF;
+    color: white; 
+    border-bottom-right-radius: 2px; 
+}
+
+li.left .chat-body .message{
+    background-color:  rgb(238, 238, 238); 
+    border-bottom-left-radius: 2px; 
+}
+
+
+
+.message {
+    border-radius: 15px; 
+    /* display: inline-block; */
+    padding-right: 10px;
+    padding-left: 10px; 
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* text-align: justify; */
+    white-space: normal;
+}
+
+.selected-message{
+    margin-right: 0px !important; 
+    padding-right: 0px !important; 
+}
+
+
+
+.panel{
+    border: 1px solid rgb(143, 143, 143);
+    box-shadow: 0 6px 6px -4px black, 
+                0px 0px 5px -4px black
+    
+}
+
+
+
+.glyphicon-refresh, .glyphicon-comment{
+    font-size: 0.9em !important;
+}
+
+.info-group {
+    margin-left: 1px; 
+}
+
+.panel-heading, #sendbutton{
+    background-color: #69ABFF; 
+    color:white; 
+    font-weight: bold;
+}
+
+#sendbutton{
+    border: 1px solid rgb(143, 143, 143);
+}   
+
+.panel-heading{
+    border-bottom: 1px solid rgb(143, 143, 143);
+}
+
+.panel-body
+{
+    overflow-y: auto;
+    height: 55vh;
+    margin: 0 auto;
+}
+
+.panel-footer{
+    background-color: white; 
+}
+
+#user-input:focus{
+    box-shadow: none; 
+}
+  
+
+
+#loading{
+    background-color:   rgb(238, 238, 238); 
+    white-space: nowrap;
+    text-align: left;
+    display: inline-block; 
+    border-radius: 15px; 
+    border-bottom-left-radius: 2px; 
+    margin: 10px; 
+    left: 0;
+    bottom: 0;
+}
+
+#loading, .push {
+    height: auto; /* .push must be the same height as .footer */
+}
+
+#loading-text{
+    animation: type 10s steps(40, end), blink 1.5s infinite;
+    white-space: pre; 
+    font-size: 1.5em; 
+    font-weight: bolder;
+}
+
+@keyframes type{ 
+    from { width: 0; } 
+    to { width: 100%; }
+} 
+
+@keyframes blink{
+    to{opacity: .0;}
+}
+
+
+.right-align{
+    text-align: right;
+}
+
+.left-align{
+    text-align: left;
+}
+
+.footer-wrapper{
+    position: relative; 
+    margin-top: 40px;
+}
+
+#footer {
+    color: gray;
+    opacity: 0.8;
+    position: absolute;
+    width: 100%; 
+    bottom: 0;
+    text-align: center; 
+}
+
+.repeat-container{
+    padding: 5px;
+    max-width: 80%; 
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-container{
+    position: relative; 
+}
+
+/* decoding box */
+#decode-parameter-box{
+    position: absolute; 
+    right: -30%; 
+    bottom: 10px; 
+    width: 30%; 
+    padding: 10px; 
+    /* border: solid gray 1px;  */
+    border-radius: 5px; 
+}
+
+@media (max-width: 992px) 
+{
+    #decode-parameter-box
+    {
+        display: none;
+    }
+}
+
+
+
+  /* range */
+  /* override */
+  input[type=range] {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 100%; /* Specific width is required for Firefox. */
+    background: #2196F3; /* Otherwise white in Chrome */
+    height: 5px;
+    border-radius: 5px; 
+  }
+  
+  input[type=range]:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+  }
+  
+  input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+  }
+
+
+
+/* swal alert customization */
+.swal-text {
+    padding: 17px;
+    display: block;
+    margin: 22px;
+    text-align: center;
+    color: #61534e;
+    font-weight: 300; 
+    font-family: "Roboto", Helvetica, sans-serif;
+}

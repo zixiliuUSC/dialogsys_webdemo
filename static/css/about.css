@@ -1,0 +1,79 @@
+body{
+    font-family: "Roboto", Helvetica, sans-serif;
+    padding-top: 20px;
+}
+
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+
+
+#title{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Abril Fatface', cursive;
+    font-weight: bolder;
+}
+
+.demo-name{
+    font-family: 'Abril Fatface', cursive;
+    font-weight: bolder;
+}
+
+#dataset {
+    font-family: "Abril Fatface", cursive;
+    font-weight: bolder;
+}
+
+
+.header {
+    margin-bottom: 20px;
+}
+
+h4 {
+    font-weight: bold;
+    margin-top: 40px; 
+}
+
+
+p {
+    margin: 20px 0;
+    text-align: justify;
+    line-height: 1.6;
+    display: block;
+}
+
+a:hover{
+    text-decoration:none;
+}
+
+img{
+    max-width: 70%; 
+    box-shadow: 0 8px 6px -6px black, 
+                0px 0px 6px -3px black;
+    padding: 4px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.caption{
+    margin-top: 10px;
+    text-align: justify; 
+    opacity: 0.8;
+    max-width: 80%; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+#footer {
+    color: gray;
+    opacity: 0.8;
+    text-align: center; 
+    margin: 20px;  
+}

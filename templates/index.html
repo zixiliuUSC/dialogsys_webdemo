@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> SpolinBot</title>
+	<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"-->
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">
+	<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script-->
+	<!--script src="{{url_for('static', filename='src/jquery.min.js')}}"></script-->
+	<script src="static/src/jquery.min.js"></script>
+	<!--link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Roboto300:700" rel="stylesheet"-->
+	<link rel="stylesheet" href="static/css/roboto_font.css">
+	<!--link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"-->
+	<link rel="stylesheet" href="static/css/bootstrap3.min.css" id="bootstrap-css">
+	<!--script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script-->
+	<script src="static/src/bootstrap3.min.js"></script>
+	<!--script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script-->
+	<script src="static/src/sweetalert.min.js"></script>
+
+	<meta name="author" content="Justin Cho">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="AI, improv, chat bot, deep learning, NLP, automated improv, artificial intelligence, open-domain dialogue system, natural language processing, gpt2">
+	<meta name="description" content="Talk with a SPOLIN-powered model to build an improvised scene together! Type your own message or choose one of our examples to start.">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"/>
+
+	<link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="static/css/main.css">
+	<link rel="stylesheet" href="static/css/custom-select.css">
+	<link rel="stylesheet" href="static/css/custom-submit-button.css">
+
+
+	
+</head>
+<body>
+
+	<div class="container">
+		<div class="row justify-content-center">
+
+			<div class="col-lg-6 col-md-8 col-11 text-center header">
+
+				<h1 id="title"> SpolinBot </h1>
+				<h5 id="short-description"> 
+					Talk with a <span id="dataset">SPOLIN</span>-powered model to build improvised scenes together! Type your own message or choose one of our examples to start. <a href="about.html" target="_blank">Learn more</a> about the details of this demo. <br>
+				</h5>
+				<div class="row justify-content-center">
+					<div id="submit-message" class="col-11 alert alert-success"> Your dialogue was successfully submitted. Thank you for your contribution! </div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							模态框（Modal）标题
+						</h4>
+					</div>
+					<form id="form_data">
+					<div class="modal-body">
+						user_id: <input type="text" id="user_id" name="user_id"/>
+						<!--name: <input type="text" id="user_name" name="user_name"/>-->
+						<input type="hidden" id="act" value="add" name="act"/>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="myModal-close" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+						<button type="button" onclick="add_userID()" class="btn btn-primary">
+							提交更改
+						</button>
+					</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div> 
+
+		<div class="row justify-content-center chat-container">
+
+			<div class="col-lg-6 col-md-8" id="instructions">
+
+				<div class="pull-right">
+					<button title="Restart" type="button" class="btn btn-default" id="close-button">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</div>
+				<h3 class="text-center">
+					User Manual
+				</h3>
+
+				<div id='instruction-list'>
+					<p>
+						Click the <span class="glyphicon glyphicon-chevron-up"></span> button above the send button to see some example prompts. Example prompts are provided only for the first turn. After sending your first message, the example prompts will be removed.
+					</p>
+
+					<p>
+						After typing your message, press <kbd>enter</kbd> or click the send button to send it. You won't be able to send an empty message.
+					</p>
+
+					<p>
+						Click the refresh button <span class="glyphicon glyphicon-refresh"></span> in the upper right corner of the chat window to remove the existing dialogue and start over. The example prompts will also be restored. 
+					</p>
+
+					<p>
+						Click the drop-down button <span class="glyphicon glyphicon-chevron-down"></span> at the right end of each message from the bot to see other generated options and click one to replace as the reply by the bot. 
+					</p>
+
+					<p>
+						If you don't like any of the options provided, choose the <strong> <span class="glyphicon glyphicon-repeat"></span> Retry </strong> option to remove this turn and generate a new set of responses. Depending on the decoding parameters, these responses may be the same from before. 
+					</p>
+
+					<p>
+						If you click submit button, this indicates that you are willing to share the dialogue that you had with our bot and allow us to collect it as data for future research. We appreciate your contribution. Note that you won't be allowed to submit a dialogue within 5 seconds of submitting one or when the bot is responding. This will be indicated with a faded-out button. Read more about our <a href="about.html/#privacy" target="_blank">privacy policy</a>.
+					</p>
+
+					<p>
+						If you are on a large screen, you can see sliders on the right side of the chat bot that allows you to adjust the decoding parameters. If you change the values during the dialogue, they will start taking effect for subsequent messages. 
+					</p>
+				</div>
+
+
+
+			</div>
+
+			<div class="col-lg-6 col-md-8 col-11">
+				<div id="submission-div" class="pull-right">
+					<div id="submit-notify" class="highlight"> 
+						Thanks for checking out <span class="chat-name">SpolinBot!</span> If you like the conversation you're having and would like to submit your dialogue to contribute to our research purposes, click the submit button! Thank you!
+					</div>
+					<button id="submit-button" class="btn"> Submit &#9432</button>
+					<div id="submission-info">
+						Once you click this button, you will submit your current dialogue history with this chat bot, indicating that you allow us to use the collected data for future research purposes. Read more about our <a href="about.html#privacy" target="_blank">privacy policy</a>. 
+					</div>
+					<img id="red-arrow" src="static/images/red-arrow.png" class="highlight">
+				</div>
+			</div>
+			
+			<div class="col-12">
+			</div>
+
+			<div class="col-lg-6 col-md-8 col-11 panel-container">
+
+				<div id="decode-parameter-box">
+					<div>
+						Decoder Settings <a href="about.html#decoder" target="_blank">&#9432</a>
+					</div>
+					<div class="form-group">
+						<label for="formControlRange">Top k </label> <span class="pull-right decoder-parameter-value" id="top-k-value">20</span>
+						<input type="range" class="form-control-range" id="formControlRange" min="1" max="50" value="20" step="1">
+					</div>
+					<div class="form-group">
+						<label for="formControlRange">Temperature</label> <span class="decoder-parameter-value pull-right" id="forward-temp-value">1.0</span>
+						<input type="range" class="form-control-range" id="formControlRange" min="0.01" max="3.0" step="0.01" value="1.0">
+					</div>
+					<div class="form-group">
+						<label for="formControlRange">MMI Temperature</label> <span class="decoder-parameter-value pull-right" id="mmi-temp-value">0.7</span>
+						<input type="range" class="form-control-range" id="formControlRange" min="0.01" max="3.0" step="0.01" value="0.7">
+					</div>
+	
+				</div>
+
+				<div class="panel">
+					<div class="panel-heading" id="accordion">
+						<span class="glyphicon glyphicon-comment"></span> <span class="chat-name"> SpolinBot</span>
+						<div class="btn-group pull-right info-group">
+							<button title="Restart" type="button" class="btn btn-xs" id="restart" style="color: white">
+								<span class="glyphicon glyphicon-refresh"></span>
+							</button>
+						</div>
+						<div class="btn-group pull-right restart-group">
+							<button title="instruction" type="button" class="btn btn-xs" id="info-button" style="color: white">
+								<span class="glyphicon glyphicon-question-sign"></span>
+							</button>
+							<button title="prompt-window" type="button" class="btn btn-xs" id="prompt-button" style="color: white" data-toggle="modal" data-target="#myModal">
+								<span class="glyphicon glyphicon-question-sign"></span>
+							</button>
+							<button class="btn btn-xs" id="prompt-button" data-toggle="modal" data-target="#myModal" onclick="userId_focus()"></button>
+						</div>
+					</div>
+					<div class="panel-collapse " id="collapseOne">
+						<div class="panel-body">
+							<ul class="chat">
+								<!--<li class="left clearfix">
+									<div class="chat-body pull-left">
+										<div class="message pull-left selected-message"> 
+											<div class="pull-left selected-option">
+												<p style="margin:0 0 5px">Get closer.  I can't hear you with our bellies touching.  We're so far apart.</p>
+												//<p style="font-size:8px;margin:0 0 5px">------------------------------</p>
+												<p style="font-size:8px;margin:0 0 0px;color:rgb(0, 195, 255)">Keywords: closer, hear bellies, far</p>
+											</div>
+											<div class="drop-down-button-wrapper btn-group pull-right">
+												<button type="button" class="btn btn-default btn-xs" id="down-button">
+													<span class="glyphicon glyphicon-chevron-down"></span>
+												</button>
+											</div>
+										</div> 
+										<div class="dropdown">
+											<div class="choice choice-top chosen"> Get closer.  I can't hear you with our bellies touching.  We're so far apart.</div>
+											<div class="choice choice-border">I don't know how to read. I didn't want to tell you and I'm embarrassed about it. I don't know how to read, Daryl</div>
+											<div class="choice choice-border">You shouldn't leave egg salad in your car.</div>
+											<div class="choice choice-border">Do what I asked you to do.  Change my flavor profile.</div>
+											<div class="choice choice-border">You have other books other than self help books here at Barnes and Noble, right?</div>
+											<div class="choice choice-bottom"> <span class="glyphicon glyphicon-repeat"></span> Retry </div>
+										</div>
+									</div>
+								</li>-->
+
+							</ul>
+							<div class="push"></div>
+						</div>
+						<div class="panel-footer">
+							<div class="prompt-select clearfix">
+								<div class="prompt-chosen-shown pull-left">Custom prompt</div>
+								<div class="drop-down-button-wrapper btn-group pull-right">
+									<button type="button" class="btn btn-default btn-xs" id="up-button">
+										<span class="glyphicon glyphicon-chevron-up"></span>
+									</button>
+								</div>
+							</div>
+							<div id="first-turn" class="prompt-dropdown">
+								<div class="prompt-choice choice-border">You're really staring deeply into my eyes right now, and I don't really know what to make of that.</div>
+								<div class="prompt-choice choice-border">I'm terribly sorry, you're wearing a scarf wrapped around your head.</div>
+								<div class="prompt-choice choice-border">Get closer.  I can't hear you with our bellies touching.  We're so far apart.</div>
+								<div class="prompt-choice choice-border">OK, it's the big day guys. Yorgy, how is the juggling coming along with Rubber Band?</div>
+								<div class="prompt-choice choice-border">Do what I asked you to do.  Change my flavor profile.</div>
+								<div class="prompt-choice choice-border">You ran full basketball plays on a plane?</div>
+								<div class="prompt-choice choice-border">This man is your half brother. You're in love with your half brother.</div>
+								<div class="prompt-choice choice-border">You have other books other than self help books here at Barnes and Noble, right?</div>
+								<div class="prompt-choice choice-border">You shouldn't leave egg salad in your car.</div>
+								<div class="prompt-choice choice-border">I don't know how to read. I didn't want to tell you and I'm embarrassed about it. I don't know how to read, Daryl.</div>
+								<div class="prompt-choice prompt-chosen">Custom prompt</div>
+							</div>
+							<div class="input-group">
+								<!-- <div> -->
+									<input id="user-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+									<span class="input-group-btn">
+										<button disabled class="btn btn-sm" id="sendbutton">Send</button>
+									</span>
+								<!-- </div> -->
+							</div>
+						</div>
+
+						<!--div class="panel-footer" id="input-userId-footer">
+							<div class="input-group">
+								<input id="user-inputID" type="text" class="form-control input-sm" placeholder="Type your ID here..." />
+								<span class="input-group-btn">
+										<button disabled class="btn btn-sm" id="sendbutton">uploadID</button>
+								</span>
+							</div>
+						</div-->
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row justify-content-center footer-wrapper" id="userID">
+			<p id="userID_">caef</p>
+		</div>
+
+		<div class="row justify-content-center footer-wrapper">
+			<div class="col-lg-6 col-md-8 col-11 footer-wrapper">
+				<div id="footer">
+					Demo by <a href="https://justin-cho.com"> Justin Cho </a> and <a href="https://www.isi.edu/~jonmay/"> Jonathan May </a>
+				</div>
+			</div>
+		</div>
+
+		
+
+
+	</div> 
+
+
+
+
+
+</body>
+
+<script type="text/javascript" src="static/src/main.js"></script>
+
+</html>
