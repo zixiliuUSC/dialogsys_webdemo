@@ -1,14 +1,14 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, json
 from DialogSys import DialogSys
 #import requests
-from sqlalchemy.orm import sessionmaker, scoped_session
-from sqlalchemy import create_engine
-from sql_model import dialog
+#from sqlalchemy.orm import sessionmaker, scoped_session
+#from sqlalchemy import create_engine
+#from sql_model import dialog
 import pdb
-some_engine = create_engine('mysql+mysqlconnector://zixi:200683088@localhost:3308/dialogsys')
-session_factory = sessionmaker(bind=some_engine)
-Session = scoped_session(session_factory)
-session_tmp = Session()
+#some_engine = create_engine('mysql+mysqlconnector://zixi:200683088@localhost:3308/dialogsys')
+#session_factory = sessionmaker(bind=some_engine)
+#Session = scoped_session(session_factory)
+#session_tmp = Session()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecret' 
 chatbot = DialogSys()
@@ -33,13 +33,14 @@ def generate():
 @app.route('/database/insert', methods=['POST'])
 def save_to_db():
   if request.method=='POST':
-    pdb.set_trace()
-    session = Session()
-    data = json.loads(request.data)
-    new_dialog = dialog(user_id=data['user_id'], log=data['log'])
-    session.add(new_dialog)
-    session.commit()
-    session.close()
+    #pdb.set_trace()
+    #session = Session()
+    #data = json.loads(request.data)
+    #new_dialog = dialog(user_id=data['user_id'], log=data['log'])
+    #session.add(new_dialog)
+    #session.commit()
+    #session.close()
+    pass
     return 'succeed'
 
 if __name__ == '__main__':
